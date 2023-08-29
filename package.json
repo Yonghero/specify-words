@@ -1,6 +1,6 @@
 {
   "name": "specify-words",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resolving matching rule resources from intersection files",
   "exports": {
     ".": {
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "run": "npx specify-words -c ./specify.config.js",
-    "dev":"rollup -c -w",
+    "dev": "rollup -c -w",
     "build": "rollup -c",
     "release": "pnpm run build && bumpp && npm publish",
     "test": "node ./test/test.js"
