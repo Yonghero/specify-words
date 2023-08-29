@@ -17,6 +17,8 @@ let plugins = []
 
 let suffix = ['.js']
 
+const supportSuffix = ['.js', '.ts', '.vue', '.jsx', '.tsx']
+
 // 文件内容已UTF8编码解读
 function readUTF8FileSource(filePath) {
   return fs.readFileSync(resolve(__dirname, filePath), { encoding: 'utf8' })
@@ -54,8 +56,9 @@ function joinSuffix(filePath) {
 
 // 根据文件路径得到文件内容
 function getSource(filePath) {
-  // console.log('filePath: ', filePath)
   filePath = joinSuffix(filePath)
+
+  if (!filePath || !supportSuffix.some((item) => filePath.endsWith(item))) return undefined
 
   let script
 
@@ -79,6 +82,8 @@ function getSource(filePath) {
 // 遍历文件内容
 function walkImport(filePath, urls, keywords = []) {
   const source = getSource(filePath)
+
+  if (!source) return
 
   const ast = getAst(filePath)
 

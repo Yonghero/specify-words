@@ -1,16 +1,15 @@
 {
   "name": "specify-words",
   "version": "1.0.1",
-  "description": "Resolving matching rule resources from intersection files",
+  "description": "Resolving matching rule resources from intersection files",  
   "exports": {
     ".": {
-      "import": "./lib/parse.mjs",
-      "require": "./lib/parse.cjs"
+      "import": "./lib/index.js"
     }
   },
   "type": "module",
   "bin": {
-    "specify-words": "./bin/cmd.js"
+    "specify-words": "./bin/cli.js"
   },
   "scripts": {
     "run": "npx specify-words -c ./specify.config.js",
