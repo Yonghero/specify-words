@@ -18,6 +18,7 @@ specifiers:
   eslint-config-airbnb-base: ^15.0.0
   eslint-plugin-import: ^2.28.1
   rollup: ^3.28.0
+  rollup-plugin-cleandir: ^2.0.0
 
 devDependencies:
   '@babel/core': 7.22.10
@@ -37,6 +38,7 @@ devDependencies:
   eslint-config-airbnb-base: 15.0.0_2cecb1c7fe26a91827cc39fac2c6a9bf
   eslint-plugin-import: 2.28.1_eslint@8.47.0
   rollup: 3.28.0
+  rollup-plugin-cleandir: 2.0.0_rollup@3.28.0
 
 packages:
 
@@ -1377,6 +1379,11 @@ packages:
       cross-spawn: 7.0.3
       string-argv: 0.3.2
       type-detect: 4.0.8
+    dev: true
+
+  /@mstssk/cleandir/1.2.1:
+    resolution: {integrity: sha512-n/62eVEJOBb3CI1Y4r/IOLzvXoI0/MxGGOryT7UGF2C2WSXV3HozwrowqtHoDDbLmWIw+HJbuHZl9vledmGpoQ==}
+    hasBin: true
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -3119,6 +3126,15 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rollup-plugin-cleandir/2.0.0_rollup@3.28.0:
+    resolution: {integrity: sha512-cTL/WbBJqHQkYBplhtiQ/yc0IqTuRR7EGw/S+XtQdaFhtv6+Xq/j8dxkk5lzTcxd0hCahUebZFYhLBRzSsgynw==}
+    peerDependencies:
+      rollup: '>=2.0.0'
+    dependencies:
+      '@mstssk/cleandir': 1.2.1
+      rollup: 3.28.0
     dev: true
 
   /rollup/3.28.0:
