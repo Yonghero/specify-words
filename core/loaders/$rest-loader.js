@@ -1,26 +1,35 @@
+import traverse from '@babel/traverse'
 import { pathsToVal } from '../utils/pathsToVal.js'
 
 export function create$RestLoader(depends) {
-  return function ({ expression, source, result }) {
-    if (expression?.type === 'CallExpression') {
-      const { start, end } = expression
+  return function ({ ast, source, result }) {
+    traverse.default(ast, {
+      ExpressionStatement(path) {
+        const expression = path?.node?.expression
+        if (!expression) return
 
-      const words = source.slice(start, end)
+        if (expression?.type === 'CallExpression') {
+          const { start, end } = expression
 
-      if (!words.includes('$rest')) return result
+          const words = source.slice(start, end)
 
-      // $rest.a.c.get()
-      if (!words.includes('this')) {
-        const splitArr = words.split('.')
-        splitArr.shift() // 去除$rest
-        splitArr.pop() // 去除.get() / .post ...
-        splitArr.unshift('obj') // 加入 urls 变量名称
+          if (!words.includes('$rest')) return
+          console.log('words: ', words)
 
-        const url = pathsToVal(depends, splitArr)
+          // $rest.a.c.get()
+          if (!words.includes('this')) {
+            const splitArr = words.split('.')
+            splitArr.shift() // 去除$rest
+            splitArr.pop() // 去除.get() / .post ...
+            splitArr.unshift('obj') // 加入 urls 变量名称
 
-        result.push(url)
-      }
-    }
+            const url = pathsToVal(depends, splitArr)
+
+            result.push(url)
+          }
+        }
+      },
+    })
 
     return result
   }

@@ -1,8 +1,9 @@
+import traverse from '@babel/traverse'
 import { pathsToVal } from '../utils/pathsToVal.js'
 
 export function createUrlLoader(depends) {
-  return function ({ source, result, path }) {
-    path.traverse({
+  return function ({ ast, source, result }) {
+    traverse.default(ast, {
       Property(path) {
         const { node } = path
         /**

@@ -1,8 +1,10 @@
+import Layout from './components/Layout.vue'
+
 export const routes = [
   {
     path: '/a',
     name: 'A',
-    component: import('./components/Test.vue'),
+    component: () => import('./components/Test.vue'),
     meta: {
       role: 'a_1',
       name: 'A',
@@ -10,7 +12,7 @@ export const routes = [
     children: [
       {
         path: '/a/1',
-        // component: 'xxx',
+        component: Layout,
         name: 'A_1',
         meta: {
           role: 'a_1_1',

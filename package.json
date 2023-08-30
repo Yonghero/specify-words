@@ -1,7 +1,7 @@
 {
   "name": "specify-words",
   "version": "1.0.1",
-  "description": "Resolving matching rule resources from intersection files",  
+  "description": "Resolving matching rule resources from intersection files",
   "exports": {
     ".": {
       "import": "./lib/index.js"
@@ -13,10 +13,10 @@
   },
   "scripts": {
     "run": "npx specify-words -c ./specify.config.js",
-    "dev": "rollup -c -w",
+    "dev": "rollup -c -w && pnpm run",
     "build": "rollup -c",
     "release": "pnpm run build && bumpp && npm publish",
-    "test": "node ./test/test.js"
+    "test": "vitest"
   },
   "author": "younghero",
   "license": "ISC",
@@ -53,6 +53,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.28.1",
     "rollup": "^3.28.0",
-    "rollup-plugin-cleandir": "^2.0.0"
+    "rollup-plugin-cleandir": "^2.0.0",
+    "vitest": "^0.34.3"
   }
 }
