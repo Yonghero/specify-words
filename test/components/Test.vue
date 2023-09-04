@@ -1,7 +1,8 @@
 <script setup>
 import { http } from '@/components/http'
-import { cate,a,ball } from './cate'
+import { cate,a,ball,word } from './cate'
 import Header from './Header.vue'
+import { ref } from 'vue'
 
 http()
 
@@ -13,13 +14,15 @@ a()
 
 // fetch("http://test.vue")
 
+const refValue = ref(1)
+
 </script>
 
 
 
 <template>
   <div>
-    <Header></Header>
+    <Header :wordaaa="word" :value="refValue"></Header>
   </div>
 </template>
 

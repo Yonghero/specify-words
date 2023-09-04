@@ -3,3 +3,5 @@ export function cate() {
 }
 
 export { a, b as ball } from './a'
+
+export const word = 1

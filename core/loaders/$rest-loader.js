@@ -14,7 +14,6 @@ export function create$RestLoader(depends) {
           const words = source.slice(start, end)
 
           if (!words.includes('$rest')) return
-          console.log('words: ', words)
 
           // $rest.a.c.get()
           if (!words.includes('this')) {

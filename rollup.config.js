@@ -10,6 +10,7 @@ export default defineConfig({
     dir: './lib',
     format: 'es',
   },
+  cache: true,
   plugins: [cleandir('./lib'), nodeResolve(), commonjs(), json()],
   external: ['@babel/parser', '@babel/traverse', '@babel/types', '@babel/core', '@vue/compiler-sfc', 'url', 'fs/promises', 'fs', 'path'],
 })

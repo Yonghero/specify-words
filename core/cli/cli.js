@@ -13,7 +13,7 @@ export function cli() {
           configPath = resolve(process.cwd(), options.args[0])
         }
       }
-      bootstrap(configPath)
+      await bootstrap(configPath)
     })
 
   program.parse(process.argv)
