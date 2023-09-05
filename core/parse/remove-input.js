@@ -18,6 +18,10 @@ export function removeInput(ast, input) {
           }
         })
       }
+
+      // if (!path?.node?.properties?.some((prop) => prop.key.value === 'name')) {
+      //   path?.remove()
+      // }
     },
   })
 }

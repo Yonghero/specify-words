@@ -26,7 +26,7 @@ export function mapInput(ast, input) {
           while (paths.length) {
             const item = property.find((p) => p.key.name === paths[0])
 
-            if (item.key.name === paths.shift()) {
+            if (item?.key?.name === paths.shift()) {
               if (item.value.type === 'StringLiteral') {
                 value = item.value.value
                 break

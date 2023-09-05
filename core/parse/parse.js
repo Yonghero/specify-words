@@ -14,6 +14,7 @@ import { rewriteInput } from './rewrite-input.js'
 import { mapInput } from './map-input.js'
 import { parseEntryPath } from './parseEntryPath.js'
 import { decodeUnicode } from '../utils/decodeUnicode.js'
+import { _astAEToCode } from '../utils/astAEToCode.js'
 
 let __dirname
 
@@ -31,7 +32,7 @@ function readUTF8FileSource(filePath) {
 }
 
 // 根据文件路径得到文件ast
-function getAst(source) {
+export function getAst(source) {
   return parser.parse(source, {
     sourceType: 'module',
     plugins: ['typescript', 'vue'],
@@ -61,7 +62,7 @@ function joinSuffix(filePath) {
 }
 
 // 根据文件路径得到文件内容
-function getSource(filePath, depends = []) {
+export function getSource(filePath, depends = []) {
   if (!supportSuffix.some((suffix) => filePath.endsWith(suffix))) {
     return undefined
   }
@@ -311,48 +312,29 @@ function runInputAction(inputArr) {
 // 输出文件
 function fileOutput(code, output, targetDir) {
   const result = output.json
+  const _filter = (arr) => arr.filter((item) => {
+    if (typeof item === 'object') {
+      const keys = Object.keys(item)
 
-  /**
-   * 将 AST ArrayExpression 转换为runtime的数组
-   * @param aePath ArrayExpressionPath
-   * @private
-   */
-  const _astAEToCode = (aePath) => {
-    if (aePath.type !== 'ArrayExpression') { return [] }
+      if (!keys.length || !item.name || !item.key) {
+        return false
+      }
 
-    const code = []
-    const { elements } = aePath
-
-    const _astOEToCode = (oePath, parent) => {
-      const { properties } = oePath
-
-      for (const property of properties) {
-        if (property.value.type === 'ArrayExpression') {
-          const value = _astAEToCode(property.value)
-          parent[property.key.name] = value
-        } else {
-          parent[property.key.name] = property.value.value
-        }
+      if (item.submenu) {
+        item.sub_menu = _filter(item.submenu)
+        delete item.submenu
+        return true
       }
     }
-
-    for (const ele of elements) {
-      if (ele.type === 'ObjectExpression') {
-        const obj = {}
-        _astOEToCode(ele, obj)
-        code.push(obj)
-      } else {
-        code.push(ele.value)
-      }
-    }
-
-    return code
-  }
+    return true
+  })
 
   traverse.default(getAst(code), {
     ArrayExpression(path) {
       if (!result.sub_menu) {
         result.sub_menu = _astAEToCode(path.node)
+
+        result.sub_menu = _filter(result.sub_menu)
       }
     },
   })
