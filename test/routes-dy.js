@@ -12,6 +12,7 @@ export const routes = [
         path: '/a/1',
         component: () => import('./components/Layout.vue'),
         name: 'hhh',
+        codes: ['add', 'update', 'export'],
         meta: {
           role: 'a_1_1',
           name: 'A_1',

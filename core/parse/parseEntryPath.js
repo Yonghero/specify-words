@@ -1,7 +1,6 @@
 import traverse from '@babel/traverse'
 
 export function parseEntryPath({ ast, source, input }, callback) {
-
   const tra = traverse.default ? traverse.default : traverse
 
   tra(ast, {

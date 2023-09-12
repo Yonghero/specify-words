@@ -18,6 +18,7 @@ import { alias } from './core/plugins/index.js'
 import { obj } from './test/components/urls.js'
 
 export default {
+  turnOn: false,
   // 输入
   input: {
     path: './test/routes-dy.js', // 含有目标数组对象的文件路径
@@ -31,6 +32,7 @@ export default {
       'meta.role': 'key',
     },
     remove: ['role', 'component', 'meta', 'path'], // 需要删除键
+    loaders: [],
   },
   // 输出
   output: {
