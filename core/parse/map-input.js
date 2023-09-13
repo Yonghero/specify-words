@@ -21,8 +21,6 @@ export function mapInput(ast, input) {
           let value
           let property = path.node.value.properties
 
-          // console.log(path.parentPath.get('properties').find(item => item.node.key.name === 'children'))
-
           while (paths.length) {
             const item = property.find((p) => p.key.name === paths[0])
 

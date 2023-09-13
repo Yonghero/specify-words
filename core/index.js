@@ -1,3 +1,6 @@
 export { alias } from './plugins'
 export { create$RestLoader, createFetchLoader, createUrlLoader } from './loaders'
 export { bootstrap } from './parse/parse.js'
+export { pathsToVal } from './utils/pathsToVal.js'
+export { ConstantMappingLoader } from './parse/constant-mapping-input.js'
+export { InsertDefaultLoader } from './parse/insert-default-input.js'

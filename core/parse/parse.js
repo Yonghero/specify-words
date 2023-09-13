@@ -306,9 +306,9 @@ function collectUrls({ entryPath, path, input }) {
 }
 
 function runInputAction(inputArr) {
-  return function (ast, input) {
+  return function (ast, input, source) {
     for (const fuc of inputArr) {
-      fuc(ast, input)
+      fuc(ast, input, source)
     }
   }
 }
@@ -373,21 +373,23 @@ export async function bootstrap(configPath) {
   const source = getSource(routesUrl)
   const ast = getAst(source)
 
-  runInputAction([insertInput, rewriteInput])(ast, input)
+  runInputAction([insertInput, rewriteInput])(ast, input, source)
 
   if (turnOn) {
     parseEntryPath({ ast, source, input }, collectUrls)
   }
 
-  runInputAction([mapInput, removeInput])(ast, input)
-
   if (input.loaders && input.loaders.length) {
-    runInputAction(input.loaders)(ast, input)
+    runInputAction(input.loaders)(ast, input, source)
   }
+
+  runInputAction([mapInput, removeInput])(ast, input, source)
 
   const { code } = babel.transformFromAstSync(ast, source, {
     comments: false,
   })
+
+  // console.log(code)
 
   const decodedOutputCode = decodeUnicode(code)
   fileOutput(decodedOutputCode, output, (resolve(configDirname, output.path)))
