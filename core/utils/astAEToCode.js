@@ -13,11 +13,13 @@ export function _astAEToCode(aePath) {
     const { properties } = oePath
 
     for (const property of properties) {
-      if (property.value.type === 'ArrayExpression') {
-        const value = _astAEToCode(property.value)
-        parent[property.key.name] = value
-      } else {
-        parent[property.key.name] = property.value.value
+      if (property.value) {
+        if (property?.value?.type === 'ArrayExpression') {
+          const value = _astAEToCode(property.value)
+          parent[property.key.name] = value
+        } else {
+          parent[property.key.name] = property.value.value
+        }
       }
     }
   }

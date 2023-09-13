@@ -28,6 +28,8 @@ export function mapInput(ast, input) {
               if (item.value.type === 'StringLiteral') {
                 value = item.value.value
                 break
+              } else if (item.value.type === 'ArrayExpression') {
+                value = item.value.elements
               } else {
                 property = item.value
                 continue
@@ -36,7 +38,13 @@ export function mapInput(ast, input) {
           }
 
           if (value) {
-            const newProperty = t.objectProperty(t.identifier(newKey), t.stringLiteral(value))
+            let newProperty
+
+            if (Array.isArray(value)) {
+              newProperty = t.objectProperty(t.identifier(newKey), t.arrayExpression(value))
+            } else {
+              newProperty = t.objectProperty(t.identifier(newKey), t.stringLiteral(value))
+            }
 
             const { properties } = path.parentPath.node
 
