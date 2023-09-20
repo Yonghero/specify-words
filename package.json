@@ -1,6 +1,6 @@
 {
   "name": "specify-words",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Resolving matching rule resources from intersection files",
   "main": "./lib/index.js",
   "exports": {
