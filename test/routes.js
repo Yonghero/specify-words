@@ -1,4 +1,4 @@
-import Layout from './components/Layout.vue'
+import Layout from '~/components/Layout.vue'
 
 export const routes = [
   {

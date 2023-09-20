@@ -18,10 +18,10 @@ import { alias } from './core/plugins/index.js'
 import { obj } from './test/components/urls.js'
 
 export default {
-  turnOn: false,
+  turnOn: true,
   // 输入
   input: {
-    path: './test/routes-dy.js', // 含有目标数组对象的文件路径
+    path: './test/routes.js', // 含有目标数组对象的文件路径
     entry: 'component', // 提供的入口键的名称
     target: 'urls', // 收集后的url写入到urls属性中
     rewrite: { // 重写对象key名称
@@ -52,6 +52,6 @@ export default {
     createUrlLoader({ obj }),
   ],
   plugins: [
-    alias({ '@': path.resolve('./test') }),
+    alias({ '@': path.resolve('./test'), '~': path.resolve('./test') }),
   ],
 }

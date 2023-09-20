@@ -120,6 +120,7 @@ function callLoaders({ ast, source, urls }) {
 function walkImport(filePath, urls, keywords = []) {
   // 文件绝对路径
   const absoluteFilePath = joinSuffix(filePath)
+  // console.log('absoluteFilePath: ', absoluteFilePath)
 
   if (!absoluteFilePath) return true
 
