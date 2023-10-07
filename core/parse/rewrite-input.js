@@ -4,7 +4,7 @@ import t from '@babel/types'
 /**
  * 处理该配置 input: {
  *     rewrite: { // 重写对象key
- *       children: 'submenu'
+ *       children: 'sub_menu'
  *     }
  * }
  * @param ast

@@ -1,4 +1,5 @@
-import Layout from '~/components/Layout.vue'
+// eslint-disable-next-line import/no-unresolved
+import Layout from '@/components/Layout.vue'
 
 export const routes = [
   {
